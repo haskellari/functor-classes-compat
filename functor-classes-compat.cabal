@@ -1,0 +1,79 @@
+name:                functor-classes-compat
+version:             1
+synopsis:            Data.Functor.Classes instances for core packages
+description:
+  "Data.Functor.Classes" instances for core packages:
+  .
+  * containers
+  .
+  * vector
+  .
+  * unordered-containers
+homepage:            https://github.com/phadej/functor-classes-compat#readme
+bug-reports:         https://github.com/phadej/functor-classes-compat/issues
+license:             BSD3
+license-file:        LICENSE
+author:              Oleg Grenrus <oleg.grenrus@iki.fi>
+maintainer:          Oleg Grenrus <oleg.grenrus@iki.fi>
+copyright:           2016 Oleg Grenrus
+category:            Data
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+tested-with:
+  GHC==7.4.2,
+  GHC==7.6.3,
+  GHC==7.8.4,
+  GHC==7.10.3,
+  GHC==8.0.1,
+  GHC==8.0.2
+
+flag base49
+  description: Pick base >= 4.9
+  manual: False
+  default: True
+
+flag transformers04
+  description: Pick transformers ==0.4
+  manual: False
+  default: False
+
+source-repository head
+  type:     git
+  location: https://github.com/phadej/functor-classes-compat
+
+library
+  exposed-modules:
+    Data.Map.Functor.Classes
+    Data.Set.Functor.Classes
+    Data.IntMap.Functor.Classes
+    Data.Vector.Functor.Classes
+    Data.HashSet.Functor.Classes
+    Data.HashMap.Functor.Classes
+  default-language:    Haskell2010
+  ghc-options: -Wall
+
+  build-depends:       containers           >=0.4 && <0.6,
+                       vector               >=0.11 && <0.12,
+                       unordered-containers >=0.2.7.1 && <0.3,
+                       hashable             >=1.0.1.1 && <1.3
+
+  if flag(base49)
+    -- transformers dependency to force transformers04 flag selection
+    build-depends:     base                 >=4.9 && <4.10,
+                       transformers         >=0.5
+    cpp-options:       -DNEW_FUNCTOR_CLASSES
+    hs-source-dirs:    src
+  else
+    build-depends:     base                 >=4.5 && <4.9
+
+  if flag(transformers04)
+    build-depends:     transformers         >=0.4 && <0.5
+    hs-source-dirs:    src-old
+  else
+    -- transformers compat isn't required with transformers-0.5, but
+    -- let's have it, as there aren't three way flags.
+    build-depends:     transformers         >=0.2 && <0.4 || >=0.5 && <0.6,
+                       transformers-compat  >=0.5 && <0.6
+    cpp-options:       -DNEW_FUNCTOR_CLASSES
+    hs-source-dirs:    src
