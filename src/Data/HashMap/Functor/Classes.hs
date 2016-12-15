@@ -12,13 +12,6 @@ instance Eq2 HashMap where
 instance Eq k => Eq1 (HashMap k) where
     liftEq = liftEq2 (==)
 
-instance Ord2 HashMap where
-    liftCompare2 cmpk cmpv m n =
-        liftCompare (liftCompare2 cmpk cmpv) (toList m) (toList n)
-
-instance Ord k => Ord1 (HashMap k) where
-    liftCompare = liftCompare2 compare
-
 instance Show2 HashMap where
     liftShowsPrec2 spk slk spv slv d m =
         showsUnaryWith (liftShowsPrec sp sl) "fromList" d (toList m)
