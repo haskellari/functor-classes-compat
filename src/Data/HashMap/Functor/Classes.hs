@@ -5,12 +5,14 @@ import Data.Functor.Classes
 import Data.Hashable        (Hashable)
 import Data.HashMap.Strict  (HashMap, fromList, size, toList)
 
-instance Eq2 HashMap where
-    liftEq2 eqk eqv m n =
-        size m == size n && liftEq (liftEq2 eqk eqv) (toList m) (toList n)
+import qualified Data.Map                 as M
+import           Data.Map.Functor.Classes ()
 
-instance Eq k => Eq1 (HashMap k) where
-    liftEq = liftEq2 (==)
+-- | Unordered-containers don't export internals, so we cannot write correct `Eq2`
+-- instance. For the same reason, the context is over-restrictive too.
+instance Ord k => Eq1 (HashMap k) where
+    liftEq eqv m n =
+        size m == size n && equals eqv m n
 
 instance Show2 HashMap where
     liftShowsPrec2 spk slk spv slv d m =
@@ -28,3 +30,13 @@ instance (Eq k, Hashable k, Read k) => Read1 (HashMap k) where
       where
         rp' = liftReadsPrec rp rl
         rl' = liftReadList rp rl
+
+-------------------------------------------------------------------------------
+-- unordered-containers don't expose internals, so this is difficult
+
+equals
+    :: Ord k
+    => (v -> v' -> Bool)
+    -> HashMap k v -> HashMap k v'
+    -> Bool
+equals eqv m n = liftEq eqv (M.fromList $ toList m) (M.fromList $ toList n)
