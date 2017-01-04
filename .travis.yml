@@ -68,6 +68,7 @@ install:
 # any command which exits with a non-zero exit code causes the build to fail.
 script:
  - if [ -f configure.ac ]; then autoreconf -i; fi
+ - ROOTDIR=$(pwd)
  - rm -rf dist/
  - cabal sdist # test that a source-distribution can be generated
  - cd dist/
@@ -92,5 +93,17 @@ script:
    RC=true; for T in ${TESTS[@]}; do echo "== $T ==";
    if dist-newstyle/build/**/$SRC_BASENAME/**/build/$T/$T; then echo "= $T OK =";
    else echo "= $T FAILED ="; RC=false; fi; done; $RC
+
+ # With various constraints
+ - if [ -d ${ROOTDIR}/travis/constraints/${HC} ]; then
+     for CFILE in ${ROOTDIR}/travis/constraints/${HC}/*; do
+        echo '=====' $(cat ${CFILE});
+        cabal new-build --constraint "$(cat $CFILE)" -w ${HC} --disable-tests --disable-benchmarks;
+      done;
+   fi
+
+branches:
+  only:
+  - master
 
 # EOF
