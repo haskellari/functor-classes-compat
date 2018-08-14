@@ -82,7 +82,7 @@ library
   -- The order is chosen so 'f f' combination is only requiring src-old
   if flag(base-transformers-1)
     if flag(base-transformers-2)
-      build-depends: base         >=4.9 && <4.12
+      build-depends: base         >=4.9 && <4.13
     else
       build-depends: base         >= 4.5 && <4.9,
                      transformers >= 0.5 && <0.6
@@ -100,7 +100,7 @@ library
 
   -- containers
   if flag(containers)
-    build-depends: containers >= 0.5.9.1 && <0.6
+    build-depends: containers >= 0.5.9.1 && <0.7
     if flag(base-transformers-1) && flag(base-transformers-2)
         hs-source-dirs: src-none/containers
     else
