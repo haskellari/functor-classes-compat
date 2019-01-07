@@ -66,6 +66,8 @@ library
     Data.Map.Functor.Classes
     Data.Set.Functor.Classes
     Data.IntMap.Functor.Classes
+    Data.Sequence.Functor.Classes
+    Data.Tree.Functor.Classes
     Data.Vector.Functor.Classes
     Data.HashSet.Functor.Classes
     Data.HashMap.Functor.Classes
