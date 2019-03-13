@@ -29,8 +29,8 @@ tested-with:
   GHC==8.0.1,
   GHC==8.0.2,
   GHC==8.2.2,
-  GHC==8.4.3,
-  GHC==8.6.1
+  GHC==8.4.4,
+  GHC==8.6.4
 
 flag base-transformers-1
   description: Together with base-transformers-1 pick: base >= 4.9, transformers < 0.4, 0.4.*, or >= 0.5. See cabal file for precise assignments.
