@@ -113,9 +113,9 @@ install:
   - touch cabal.project
   - |
     echo "packages: ." >> cabal.project
+  - if [ $HCNUMVER -ge 80000 ] ; then echo 'package functor-classes-compat' >> cabal.project ; fi
+  - "if [ $HCNUMVER -ge 80000 ] ; then echo '  ghc-options: -Werror=missing-methods' >> cabal.project ; fi"
   - |
-    echo "package functor-classes-compat"         >> cabal.project
-    echo "  ghc-options: -Werror=missing-methods" >> cabal.project
   - "for pkg in $($HCPKG list --simple-output); do echo $pkg | sed 's/-[^-]*$//' | (grep -vE -- '^(functor-classes-compat)$' || true) | sed 's/^/constraints: /' | sed 's/$/ installed/' >> cabal.project.local; done"
   - cat cabal.project || true
   - cat cabal.project.local || true
@@ -140,9 +140,9 @@ script:
   - touch cabal.project
   - |
     echo "packages: ${PKGDIR_functor_classes_compat}" >> cabal.project
+  - if [ $HCNUMVER -ge 80000 ] ; then echo 'package functor-classes-compat' >> cabal.project ; fi
+  - "if [ $HCNUMVER -ge 80000 ] ; then echo '  ghc-options: -Werror=missing-methods' >> cabal.project ; fi"
   - |
-    echo "package functor-classes-compat"         >> cabal.project
-    echo "  ghc-options: -Werror=missing-methods" >> cabal.project
   - "for pkg in $($HCPKG list --simple-output); do echo $pkg | sed 's/-[^-]*$//' | (grep -vE -- '^(functor-classes-compat)$' || true) | sed 's/^/constraints: /' | sed 's/$/ installed/' >> cabal.project.local; done"
   - cat cabal.project || true
   - cat cabal.project.local || true
