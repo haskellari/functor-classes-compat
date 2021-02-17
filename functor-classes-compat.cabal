@@ -87,7 +87,7 @@ library
   -- The order is chosen so 'f f' combination is only requiring src-old
   if flag(base-transformers-1)
     if flag(base-transformers-2)
-      build-depends: base >=4.9 && <4.15
+      build-depends: base >=4.9 && <4.16
 
     else
       build-depends:
