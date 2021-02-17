@@ -1,6 +1,5 @@
 name:               functor-classes-compat
-version:            1
-x-revision:         7
+version:            1.0.1
 synopsis:           Data.Functor.Classes instances for core packages
 description:
   "Data.Functor.Classes" instances for core packages:
@@ -20,7 +19,7 @@ maintainer:         Oleg Grenrus <oleg.grenrus@iki.fi>
 copyright:          2016 Oleg Grenrus
 category:           Data
 build-type:         Simple
-extra-source-files: README.md
+extra-source-files: README.md changelog.md
 cabal-version:      >=1.10
 tested-with:
   GHC ==7.4.2
