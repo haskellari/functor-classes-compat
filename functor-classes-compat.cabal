@@ -33,6 +33,7 @@ tested-with:
    || ==8.8.4
    || ==8.10.4
    || ==9.0.1
+   || ==9.2.1
 
 flag base-transformers-1
   description:
@@ -89,7 +90,7 @@ library
   -- The order is chosen so 'f f' combination is only requiring src-old
   if flag(base-transformers-1)
     if flag(base-transformers-2)
-      build-depends: base >=4.9 && <4.16
+      build-depends: base >=4.9 && <4.17
 
     else
       build-depends:
