@@ -1,5 +1,6 @@
 name:               functor-classes-compat
 version:            1.0.1
+x-revision:         1
 synopsis:           Data.Functor.Classes instances for core packages
 description:
   "Data.Functor.Classes" instances for core packages:
