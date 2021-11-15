@@ -1,1 +1,5 @@
 branches: master
+
+constraint-set transformers-0.4
+  ghc: <7.8
+  constraints: transformers ==0.4.*
