@@ -3,3 +3,9 @@ branches: master
 constraint-set transformers-0.4
   ghc: <7.8
   constraints: transformers ==0.4.*
+
+constraint-set transformers-0.5
+  constraints: transformers ==0.5.*
+
+constraint-set transformers-0.6
+  constraints: transformers ==0.6.*
