@@ -1,5 +1,5 @@
 name:               functor-classes-compat
-version:            2.0.0.1
+version:            2.0.0.2
 synopsis:           Data.Functor.Classes instances for core packages
 description:
   "Data.Functor.Classes" instances for core packages:
@@ -67,6 +67,11 @@ library
   default-language: Haskell2010
   ghc-options:      -Wall
 
+  -- self test:
+  -- so instances existence is tested while library is built.
+  hs-source-dirs: test
+  other-modules: SelfTest
+
   -- base and transformer dependencies:
   -- t t: base >= 4.9
   -- t f: transformers >= 0.5
@@ -81,7 +86,7 @@ library
     else
       build-depends:
           base          >=4.5 && <4.9
-        , transformers  >=0.5 && <0.6
+        , transformers  >=0.5 && <0.7
 
   else
     if flag(base-transformers-2)
